@@ -1,0 +1,16 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+
+  "name": "api",
+  "compatibility_date": "2025-08-14",
+
+  "main": "src/index.ts",
+  "observability": {
+    "enabled": true,
+  },
+
+  "dev": {
+    "port": 7000,
+    "inspector_port": 7100
+  },
+}

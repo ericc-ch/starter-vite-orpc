@@ -1,0 +1,6 @@
+packages:
+  - apps/*
+
+catalogs:
+  cloudflare:
+    "wrangler": "^4.29.1"

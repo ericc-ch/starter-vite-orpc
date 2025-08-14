@@ -1,0 +1,18 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+
+  "name": "web",
+  "compatibility_date": "2025-08-14",
+
+  "assets": {
+    "directory": "./public",
+  },
+  "observability": {
+    "enabled": true,
+  },
+
+  "dev": {
+    "port": 7001,
+    "inspector_port": 7101
+  },
+}
