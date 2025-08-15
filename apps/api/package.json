@@ -2,12 +2,13 @@
 	"name": "api",
 	"version": "0.0.0",
 	"private": true,
+  "type": "module",
 	"scripts": {
+		"cf-typegen": "wrangler types",
 		"deploy": "wrangler deploy",
 		"dev": "wrangler dev",
 		"start": "wrangler dev",
-		"test": "vitest",
-		"cf-typegen": "wrangler types"
+		"test": "vitest"
 	},
 	"devDependencies": {
 		"wrangler": "catalog:cloudflare"

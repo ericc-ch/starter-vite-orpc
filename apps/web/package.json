@@ -2,12 +2,27 @@
 	"name": "web",
 	"version": "0.0.0",
 	"private": true,
+  "type": "module",
 	"scripts": {
+    "build": "vite build",
 		"deploy": "wrangler deploy",
-		"dev": "wrangler dev",
-		"start": "wrangler dev"
+		"dev": "vite",
+		"start": "vite preview"
+	},
+	"dependencies": {
+		"@tailwindcss/vite": "^4.1.12",
+		"react": "^19.1.1",
+		"react-dom": "^19.1.1",
+		"tailwindcss": "^4.1.12"
 	},
 	"devDependencies": {
+		"@cloudflare/vite-plugin": "^1.11.5",
+		"@types/react": "^19.1.10",
+		"@types/react-dom": "^19.1.7",
+		"@vitejs/plugin-react": "^5.0.0",
+		"typescript": "^5.9.2",
+		"vite": "^7.1.2",
+		"vite-tsconfig-paths": "^5.1.4",
 		"wrangler": "catalog:cloudflare"
 	}
 }

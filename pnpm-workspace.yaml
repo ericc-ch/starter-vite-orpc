@@ -1,6 +1,8 @@
+shellEmulator: true
+
 packages:
   - apps/*
 
 catalogs:
   cloudflare:
-    "wrangler": "^4.29.1"
+    wrangler: 4.30.x

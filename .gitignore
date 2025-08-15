@@ -1,17 +1,15 @@
 # npm
-
 node_modules/
 
 # wrangler project
-
+.wrangler/
 .dev.vars*
 !.dev.vars.example
-
 .env*
 !.env.example
 
-.wrangler/
-
 # turbo
-
 .turbo/
+
+# vite
+dist/
