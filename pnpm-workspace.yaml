@@ -1,8 +1,0 @@
-shellEmulator: true
-
-packages:
-  - apps/*
-
-catalogs:
-  cloudflare:
-    wrangler: 4.30.x

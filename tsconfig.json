@@ -19,7 +19,8 @@
   },
 
   "references": [
-    { "path": "./apps/web" },
+    { "path": "./apps/web/" },
+    { "path": "./tsconfig.configs.json" }
   ],
 
   "files": []

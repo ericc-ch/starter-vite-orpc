@@ -3,6 +3,7 @@ node_modules/
 
 # wrangler project
 .wrangler/
+worker-configuration.d.ts
 .dev.vars*
 !.dev.vars.example
 .env*
@@ -13,3 +14,6 @@ node_modules/
 
 # vite
 dist/
+
+# eslint
+.eslintcache

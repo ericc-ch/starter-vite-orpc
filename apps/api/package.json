@@ -1,16 +1,16 @@
 {
-	"name": "api",
-	"version": "0.0.0",
-	"private": true,
+  "name": "api",
+  "version": "0.0.0",
+  "description": "A starter kit for a Vite + oRPC",
   "type": "module",
-	"scripts": {
-		"cf-typegen": "wrangler types",
-		"deploy": "wrangler deploy",
-		"dev": "wrangler dev",
-		"start": "wrangler dev",
-		"test": "vitest"
-	},
-	"devDependencies": {
-		"wrangler": "catalog:cloudflare"
-	}
+  "scripts": {
+    "deploy": "wrangler deploy",
+    "dev": "wrangler dev",
+    "start": "wrangler dev",
+    "test": "vitest",
+    "typegen": "wrangler types"
+  },
+  "devDependencies": {
+    "wrangler": "catalog:cloudflare"
+  }
 }

@@ -1,5 +1,5 @@
 {
-  "$schema": "node_modules/wrangler/config-schema.json",
+  "$schema": "../../node_modules/wrangler/config-schema.json",
 
   "name": "api",
   "compatibility_date": "2025-08-14",
@@ -11,6 +11,6 @@
 
   "dev": {
     "port": 7000,
-    "inspector_port": 7100
+    "inspector_port": 7100,
   },
 }
