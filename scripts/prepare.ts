@@ -1,9 +1,9 @@
-const result = await Promise.all([
+const commands = [
   Bun.spawnSync(["bunx", "simple-git-hooks"]),
   Bun.spawnSync(["bun", "run", "typegen"]),
-])
+]
 
-for (const { stdout } of result) {
+for (const { stdout } of commands) {
   process.stdout.write(stdout)
 }
 
