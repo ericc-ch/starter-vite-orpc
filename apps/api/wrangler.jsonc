@@ -3,11 +3,21 @@
 
   "name": "api",
   "compatibility_date": "2025-08-14",
+  "compatibility_flags": ["nodejs_compat"],
 
   "main": "src/index.ts",
   "observability": {
     "enabled": true,
   },
+
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_id": "db",
+      "database_name": "db",
+      "migrations_dir": "./migrations",
+    },
+  ],
 
   "dev": {
     "port": 7000,

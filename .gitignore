@@ -17,3 +17,6 @@ dist/
 
 # eslint
 .eslintcache
+
+# migrations, un-ignore for real apps
+migrations/

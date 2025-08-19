@@ -1,0 +1,14 @@
+{
+  "name": "rpc",
+  "version": "0.0.0",
+  "description": "A starter kit for a Vite + oRPC",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@orpc/client": "catalog:orpc",
+    "@orpc/contract": "catalog:orpc",
+    "@orpc/server": "catalog:orpc"
+  }
+}

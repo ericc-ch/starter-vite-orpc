@@ -3,7 +3,6 @@
   "include": ["./src/"],
 
   "compilerOptions": {
-    "composite": true,
-    "types": ["./worker-configuration.d.ts"]
+    "composite": true
   }
 }

@@ -4,6 +4,6 @@
 
   "compilerOptions": {
     "composite": true,
-    "types": ["./worker-configuration.d.ts"]
+    "types": ["../../apps/api/worker-configuration.d.ts"]
   }
 }

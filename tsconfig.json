@@ -1,4 +1,13 @@
 {
+  "files": [],
+  "references": [
+    { "path": "./apps/api" },
+    { "path": "./apps/web/" },
+    { "path": "./packages/db" },
+    { "path": "./packages/rpc" },
+    { "path": "./tsconfig.configs.json" }
+  ],
+
   "compilerOptions": {
     "target": "ES2022",
     "skipLibCheck": true,
@@ -16,12 +25,5 @@
     "exactOptionalPropertyTypes": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
-  },
-
-  "references": [
-    { "path": "./apps/web/" },
-    { "path": "./tsconfig.configs.json" }
-  ],
-
-  "files": []
+  }
 }
