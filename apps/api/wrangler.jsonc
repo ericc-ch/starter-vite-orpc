@@ -18,6 +18,12 @@
       "migrations_dir": "./migrations",
     },
   ],
+  "kv_namespaces": [
+    {
+      "binding": "KV",
+      "id": "kv",
+    },
+  ],
 
   "dev": {
     "port": 7000,

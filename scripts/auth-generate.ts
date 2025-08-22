@@ -1,10 +1,16 @@
-const commands = [
-  Bun.spawnSync(["bunx", "simple-git-hooks"]),
-  Bun.spawnSync(["bun", "run", "typegen"]),
-]
+const command = Bun.spawnSync([
+  "bunx",
+  "@better-auth/cli",
+  "generate",
+  "--yes",
+  "--config",
+  "./packages/auth/src/config.ts",
+  "--output",
+  "./packages/db/src/schema/auth.sql.ts",
+])
 
-for (const { stdout } of commands) {
-  process.stdout.write(stdout)
-}
+const { stdout } = command
+
+process.stdout.write(stdout)
 
 export {}

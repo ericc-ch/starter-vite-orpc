@@ -8,7 +8,7 @@
     "./packages/*"
   ],
   "scripts": {
-    "auth:generate": "bunx @better-auth/cli generate --config ./packages/auth/src/config.ts",
+    "auth:generate": "bun run ./scripts/auth-generate.ts",
     "build": "turbo run build",
     "db:generate": "drizzle-kit generate",
     "dev": "turbo run dev",
