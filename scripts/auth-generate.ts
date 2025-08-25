@@ -1,15 +1,13 @@
-const command = Bun.spawnSync([
+const { stdout } = Bun.spawnSync([
   "bunx",
   "@better-auth/cli",
   "generate",
   "--yes",
   "--config",
-  "./packages/auth/src/config.ts",
+  "./apps/api/src/auth/config.ts",
   "--output",
-  "./packages/db/src/schema/auth.sql.ts",
+  "./apps/api/src/db/schema/auth.sql.ts",
 ])
-
-const { stdout } = command
 
 process.stdout.write(stdout)
 

@@ -18,6 +18,12 @@
     "apps/api": {
       "name": "api",
       "version": "0.0.0",
+      "dependencies": {
+        "better-auth": "^1.3.7",
+        "drizzle-orm": "catalog:drizzle",
+        "drizzle-zod": "catalog:drizzle",
+        "zod": "catalog:default",
+      },
       "devDependencies": {
         "wrangler": "catalog:cloudflare",
       },
@@ -40,23 +46,6 @@
         "vite": "^7.1.2",
         "vite-tsconfig-paths": "^5.1.4",
         "wrangler": "catalog:cloudflare",
-      },
-    },
-    "packages/auth": {
-      "name": "auth",
-      "version": "0.0.0",
-      "dependencies": {
-        "better-auth": "^1.3.7",
-        "db": "workspace:*",
-      },
-    },
-    "packages/db": {
-      "name": "db",
-      "version": "0.0.0",
-      "dependencies": {
-        "drizzle-orm": "catalog:drizzle",
-        "drizzle-zod": "catalog:drizzle",
-        "zod": "catalog:default",
       },
     },
     "packages/rpc": {
@@ -590,8 +579,6 @@
 
     "async-function": ["async-function@1.0.0", "", {}, "sha512-hsU18Ae8CDTR6Kgu9DYf0EbCr/a5iGL0rytQDobUcdpYOKokk8LEjVphnXkDkgpi0wYVsqrXuP0bZxJaTqdgoA=="],
 
-    "auth": ["auth@workspace:packages/auth"],
-
     "available-typed-arrays": ["available-typed-arrays@1.0.7", "", { "dependencies": { "possible-typed-array-names": "^1.0.0" } }, "sha512-wvUjBtSGN7+7SjNpq/9M2Tg350UZD3q62IFZLbRAR1bSMlCo1ZaeW+BJ+D090e4hIIZLBcTDWe4Mh4jvUDajzQ=="],
 
     "axe-core": ["axe-core@4.10.3", "", {}, "sha512-Xm7bpRXnDSX2YE2YFfBk2FnF0ep6tmG7xPh8iHee8MIcrgq762Nkce856dYtJYLkuIoYZvGfTs/PbZhideTcEg=="],
@@ -697,8 +684,6 @@
     "data-view-byte-length": ["data-view-byte-length@1.0.2", "", { "dependencies": { "call-bound": "^1.0.3", "es-errors": "^1.3.0", "is-data-view": "^1.0.2" } }, "sha512-tuhGbE6CfTM9+5ANGf+oQb72Ky/0+s3xKUpHvShfiz2RxMFgFPjsXuRLBVMtvMs15awe45SRb83D6wH4ew6wlQ=="],
 
     "data-view-byte-offset": ["data-view-byte-offset@1.0.1", "", { "dependencies": { "call-bound": "^1.0.2", "es-errors": "^1.3.0", "is-data-view": "^1.0.1" } }, "sha512-BS8PfmtDGnrgYdOonGZQdLZslWIeCGFP9tpan0hi1Co2Zr2NKADsvGYA8XxuG/4UWgJ6Cjtv+YJnB6MM69QGlQ=="],
-
-    "db": ["db@workspace:packages/db"],
 
     "debug": ["debug@4.4.1", "", { "dependencies": { "ms": "^2.1.3" } }, "sha512-KcKCqiftBJcZr++7ykoDIEwSa3XWowTfNPo92BYxjXiyYEVrUQh2aLyhxBCwww+heortUFxEJYcRzosstTEBYQ=="],
 

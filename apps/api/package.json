@@ -10,6 +10,12 @@
     "test": "vitest",
     "typegen": "wrangler types"
   },
+  "dependencies": {
+    "better-auth": "^1.3.7",
+    "drizzle-orm": "catalog:drizzle",
+    "drizzle-zod": "catalog:drizzle",
+    "zod": "catalog:default"
+  },
   "devDependencies": {
     "wrangler": "catalog:cloudflare"
   }

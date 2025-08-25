@@ -10,7 +10,7 @@
   "scripts": {
     "auth:generate": "bun run ./scripts/auth-generate.ts",
     "build": "turbo run build",
-    "db:generate": "drizzle-kit generate",
+    "db:generate": "bun run ./scripts/db-generate.ts",
     "dev": "turbo run dev",
     "lint": "eslint --cache --fix",
     "prepare": "bun run ./scripts/prepare.ts",
