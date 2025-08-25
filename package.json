@@ -9,13 +9,13 @@
   ],
   "scripts": {
     "auth:generate": "bun run ./scripts/auth-generate.ts",
-    "build": "turbo run build",
+    "build": "bun --filter '*' build",
     "db:generate": "bun run ./scripts/db-generate.ts",
-    "dev": "turbo run dev",
+    "dev": "bun --filter '*' dev",
     "lint": "eslint --cache",
     "prepare": "bun run ./scripts/prepare.ts",
-    "start": "turbo run start",
-    "typegen": "turbo run typegen"
+    "start": "bun --filter '*' start",
+    "typegen": "bun --filter '*' typegen"
   },
   "simple-git-hooks": {
     "pre-commit": "bunx lint-staged"
@@ -31,7 +31,6 @@
     "eslint": "^9.34.0",
     "prettier-plugin-tailwindcss": "^0.6.14",
     "simple-git-hooks": "^2.13.1",
-    "turbo": "^2.5.6",
     "typescript": "^5.9.2"
   },
   "packageManager": "bun@1.2.20",
