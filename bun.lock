@@ -19,9 +19,12 @@
       "name": "api",
       "version": "0.0.0",
       "dependencies": {
+        "@orpc/openapi": "catalog:orpc",
+        "@orpc/server": "catalog:orpc",
         "better-auth": "catalog:better-auth",
         "drizzle-orm": "catalog:drizzle",
         "drizzle-zod": "catalog:drizzle",
+        "hono": "^4.9.4",
         "zod": "catalog:default",
       },
       "devDependencies": {
@@ -76,6 +79,7 @@
     "orpc": {
       "@orpc/client": "^1.8.4",
       "@orpc/contract": "^1.8.4",
+      "@orpc/openapi": "^1.8.4",
       "@orpc/server": "^1.8.4",
     },
   },
@@ -368,11 +372,23 @@
 
     "@orpc/contract": ["@orpc/contract@1.8.4", "", { "dependencies": { "@orpc/client": "1.8.4", "@orpc/shared": "1.8.4", "@standard-schema/spec": "^1.0.0", "openapi-types": "^12.1.3" } }, "sha512-QnP9waWbniuHUbqVL4BQiYZlI32+333Xz7FOJQH16SekCkwQQjO0ca6TPD0xYfcmOVk61ojrZRLM85s42BLmNw=="],
 
+    "@orpc/interop": ["@orpc/interop@1.8.4", "", {}, "sha512-S2UwcTDF7kooyKA9PcNMlO0NB/HjxOS1rDB9V5XziZkfJdIA1AnC0agMtC6KB9GbegWt4p4qC1pT2/oa1X+Akw=="],
+
+    "@orpc/openapi": ["@orpc/openapi@1.8.4", "", { "dependencies": { "@orpc/client": "1.8.4", "@orpc/contract": "1.8.4", "@orpc/interop": "1.8.4", "@orpc/openapi-client": "1.8.4", "@orpc/server": "1.8.4", "@orpc/shared": "1.8.4", "@orpc/standard-server": "1.8.4", "rou3": "^0.7.3" } }, "sha512-5Y9wjukcvU4IrqSSwFQVscEZqXWmOm7NbVFA07QXkNy2PApmWoHQg1F4IRl20xBJqq4e5ZYBITyfodKehSGEHQ=="],
+
+    "@orpc/openapi-client": ["@orpc/openapi-client@1.8.4", "", { "dependencies": { "@orpc/client": "1.8.4", "@orpc/contract": "1.8.4", "@orpc/shared": "1.8.4", "@orpc/standard-server": "1.8.4" } }, "sha512-5M0WoaFsyqcpWT5X5Fquha2yv1H5F+xb2U/FZ56O9vq9NwfT4OUgkFBcy3ethw1Oogh0FA3JCT2mScHHf2JaSg=="],
+
+    "@orpc/server": ["@orpc/server@1.8.4", "", { "dependencies": { "@orpc/client": "1.8.4", "@orpc/contract": "1.8.4", "@orpc/interop": "1.8.4", "@orpc/shared": "1.8.4", "@orpc/standard-server": "1.8.4", "@orpc/standard-server-aws-lambda": "1.8.4", "@orpc/standard-server-fetch": "1.8.4", "@orpc/standard-server-node": "1.8.4", "@orpc/standard-server-peer": "1.8.4", "cookie": "^1.0.2" }, "peerDependencies": { "crossws": ">=0.3.4", "ws": ">=8.18.1" }, "optionalPeers": ["crossws", "ws"] }, "sha512-MCdkCpLD9PHqKShgXmm7GYHMlXc3OlnM696EtFZprf5xXlq9mxzR2XePd5kmIRS7lyU2XDsq5O79OgE+J6xXMw=="],
+
     "@orpc/shared": ["@orpc/shared@1.8.4", "", { "dependencies": { "radash": "^12.1.1", "type-fest": "^4.39.1" }, "peerDependencies": { "@opentelemetry/api": ">=1.9.0" }, "optionalPeers": ["@opentelemetry/api"] }, "sha512-zQ6UvFBZUXhvmDVbI+m8Dmw2t2XzRdOskkPrqeiGFy8zHhkPiAn919eB8YX7r0NNj6ry4P+VSP9aw0kfcWlAtg=="],
 
     "@orpc/standard-server": ["@orpc/standard-server@1.8.4", "", { "dependencies": { "@orpc/shared": "1.8.4" } }, "sha512-8DFhIAVqLwZzvcuqX5Tg+nPuG8FUeaH5d5KBwuEzcbEHE5qaGn7hkxCsdANlw9RpmpVzeRvfWWWkobcvAJTraw=="],
 
+    "@orpc/standard-server-aws-lambda": ["@orpc/standard-server-aws-lambda@1.8.4", "", { "dependencies": { "@orpc/shared": "1.8.4", "@orpc/standard-server": "1.8.4", "@orpc/standard-server-fetch": "1.8.4", "@orpc/standard-server-node": "1.8.4" } }, "sha512-1l9Bn1TQn6wVG94X4/hpTZXO/hJadFDI+tU89GtsjdRfvwoF9D6i5gLU/V5fUykLD8+X/YKhfgdETZTBJhIiuA=="],
+
     "@orpc/standard-server-fetch": ["@orpc/standard-server-fetch@1.8.4", "", { "dependencies": { "@orpc/shared": "1.8.4", "@orpc/standard-server": "1.8.4" } }, "sha512-s+kIxM9sOqiBRMI/llF5k5ZdFJ1dSUnrlb9OVCX957ZktdXJrWtbkDFmAFOhwSs2/JuXT5DcFXQFC3X6uj+Lhw=="],
+
+    "@orpc/standard-server-node": ["@orpc/standard-server-node@1.8.4", "", { "dependencies": { "@orpc/shared": "1.8.4", "@orpc/standard-server": "1.8.4", "@orpc/standard-server-fetch": "1.8.4" } }, "sha512-oTFOHGc1/3DpjxTL2YTX5B/FpmPMd1p2+0iMZt9Xa4GX4dABqY1VF7o+HL7i+TioFg249ajBEYFTdRyjJpPlYg=="],
 
     "@orpc/standard-server-peer": ["@orpc/standard-server-peer@1.8.4", "", { "dependencies": { "@orpc/shared": "1.8.4", "@orpc/standard-server": "1.8.4" } }, "sha512-LnMONm63FeCJ6kd4Ktj7/G4bgEmMXgOMdX2vHXTYWKl5ph7sByJouBu2hCGRPkoiDvroBkVmsNsrb3hVIeZ33Q=="],
 
@@ -900,6 +916,8 @@
 
     "hasown": ["hasown@2.0.2", "", { "dependencies": { "function-bind": "^1.1.2" } }, "sha512-0hJU9SCPvmMzIBdZFqNPXWa6dqh7WdH0cII9y+CyS8rG3nL48Bclra9HmKhVVUHyPWNH5Y7xDwAB7bfgSjkUMQ=="],
 
+    "hono": ["hono@4.9.4", "", {}, "sha512-61hl6MF6ojTl/8QSRu5ran6GXt+6zsngIUN95KzF5v5UjiX/xnrLR358BNRawwIRO49JwUqJqQe3Rb2v559R8Q=="],
+
     "ieee754": ["ieee754@1.2.1", "", {}, "sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA=="],
 
     "ignore": ["ignore@5.3.2", "", {}, "sha512-hsBTNUqQTDwkWtcdYI2i06Y/nUBEsNEDJKjWdigLvegy8kDuJAS8uRlpkkcQpyEXL0Z/pjDy5HBmMjRCJ2gq+g=="],
@@ -1208,7 +1226,7 @@
 
     "rollup": ["rollup@4.46.2", "", { "dependencies": { "@types/estree": "1.0.8" }, "optionalDependencies": { "@rollup/rollup-android-arm-eabi": "4.46.2", "@rollup/rollup-android-arm64": "4.46.2", "@rollup/rollup-darwin-arm64": "4.46.2", "@rollup/rollup-darwin-x64": "4.46.2", "@rollup/rollup-freebsd-arm64": "4.46.2", "@rollup/rollup-freebsd-x64": "4.46.2", "@rollup/rollup-linux-arm-gnueabihf": "4.46.2", "@rollup/rollup-linux-arm-musleabihf": "4.46.2", "@rollup/rollup-linux-arm64-gnu": "4.46.2", "@rollup/rollup-linux-arm64-musl": "4.46.2", "@rollup/rollup-linux-loongarch64-gnu": "4.46.2", "@rollup/rollup-linux-ppc64-gnu": "4.46.2", "@rollup/rollup-linux-riscv64-gnu": "4.46.2", "@rollup/rollup-linux-riscv64-musl": "4.46.2", "@rollup/rollup-linux-s390x-gnu": "4.46.2", "@rollup/rollup-linux-x64-gnu": "4.46.2", "@rollup/rollup-linux-x64-musl": "4.46.2", "@rollup/rollup-win32-arm64-msvc": "4.46.2", "@rollup/rollup-win32-ia32-msvc": "4.46.2", "@rollup/rollup-win32-x64-msvc": "4.46.2", "fsevents": "~2.3.2" }, "bin": { "rollup": "dist/bin/rollup" } }, "sha512-WMmLFI+Boh6xbop+OAGo9cQ3OgX9MIg7xOQjn+pTCwOkk+FNDAeAemXkJ3HzDJrVXleLOFVa1ipuc1AmEx1Dwg=="],
 
-    "rou3": ["rou3@0.5.1", "", {}, "sha512-OXMmJ3zRk2xeXFGfA3K+EOPHC5u7RDFG7lIOx0X1pdnhUkI8MdVrbV+sNsD80ElpUZ+MRHdyxPnFthq9VHs8uQ=="],
+    "rou3": ["rou3@0.7.3", "", {}, "sha512-KKenF/hB2iIhS1ohj226LT+/8uKCBpSMqeS4V1UPN9vad99uLoyIhrULRRB1skaB40LQHcBlSsAi3sT8MaoDDQ=="],
 
     "rpc": ["rpc@workspace:packages/rpc"],
 
@@ -1477,6 +1495,8 @@
     "@typescript-eslint/eslint-plugin/ignore": ["ignore@7.0.5", "", {}, "sha512-Hs59xBNfUIunMFgWAbGX5cq6893IbWg4KnrjbYwX3tx0ztorVgTDA6B2sxf8ejHJ4wz8BqGUMYlnzNBer5NvGg=="],
 
     "@typescript-eslint/typescript-estree/minimatch": ["minimatch@9.0.5", "", { "dependencies": { "brace-expansion": "^2.0.1" } }, "sha512-G6T0ZX48xgozx7587koeX9Ys2NYy6Gmv//P89sEte9V9whIapMNF4idKxnW2QtCcLiTWlb/wfCabAtAFWhhBow=="],
+
+    "better-call/rou3": ["rou3@0.5.1", "", {}, "sha512-OXMmJ3zRk2xeXFGfA3K+EOPHC5u7RDFG7lIOx0X1pdnhUkI8MdVrbV+sNsD80ElpUZ+MRHdyxPnFthq9VHs8uQ=="],
 
     "clean-regexp/escape-string-regexp": ["escape-string-regexp@1.0.5", "", {}, "sha512-vbRorB5FUQWvla16U8R/qgaFIya2qGzwDrNmCZuYKrbdSUMG6I1ZCGQRefkRVhuOkIGVne7BQ35DSfo1qvJqFg=="],
 

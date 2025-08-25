@@ -1,6 +1,8 @@
 {
   "editor.codeActionsOnSave": {
     "source.fixAll.ts": "explicit",
-    "source.fixAll.eslint": "explicit",
-  }
+    "source.fixAll.eslint": "explicit"
+  },
+
+  "cSpell.words": ["ORPC"]
 }

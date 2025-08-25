@@ -2,15 +2,11 @@ import { oc } from "@orpc/contract"
 import * as db from "api/db"
 import { z } from "zod"
 
-const get = oc
+const add = oc
   .route({
-    method: "GET",
+    method: "POST",
   })
-  .input(
-    z.object({
-      id: z.number(),
-    }),
-  )
+  .input(db.bookInsert)
   .output(db.bookSelect)
 
 const list = oc
@@ -20,28 +16,40 @@ const list = oc
   .input(z.object({}))
   .output(z.object({ data: z.array(db.bookSelect) }))
 
-const add = oc
+const get = oc
   .route({
-    method: "POST",
+    path: "/{id}",
+    method: "GET",
   })
-  .input(db.bookInsert)
+  .input(
+    z.object({
+      id: z.number(),
+    }),
+  )
   .output(db.bookSelect)
 
 const update = oc
   .route({
+    path: "/{id}",
     method: "PATCH",
   })
-  .input(db.bookUpdate)
+  .input(
+    z.object({
+      ...db.bookUpdate.shape,
+      id: z.number(),
+    }),
+  )
   .output(db.bookSelect)
 
 const remove = oc
   .route({
+    path: "/{id}",
     method: "DELETE",
   })
   .input(z.object({ id: z.number() }))
-  .output(z.object({ id: z.number() }))
+  .output(db.bookSelect)
 
-export const booksContract = oc.prefix("/books").router({
+export const books = oc.prefix("/books").router({
   get,
   list,
   add,
