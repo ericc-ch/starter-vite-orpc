@@ -3,7 +3,6 @@
   "references": [
     { "path": "./apps/api" },
     { "path": "./apps/web/" },
-    { "path": "./packages/db" },
     { "path": "./packages/rpc" },
     { "path": "./tsconfig.configs.json" }
   ],

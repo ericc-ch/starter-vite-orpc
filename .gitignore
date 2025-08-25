@@ -12,11 +12,12 @@ worker-configuration.d.ts
 # turbo
 .turbo/
 
-# vite
-dist/
-
 # eslint
 .eslintcache
 
 # migrations, un-ignore for real apps
 migrations/
+
+# frontend
+dist/
+*.gen.ts

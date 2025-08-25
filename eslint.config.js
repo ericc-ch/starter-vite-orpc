@@ -1,8 +1,5 @@
 import config from "@echristian/eslint-config"
 
-/**
- * @type {import('@echristian/eslint-config').Config}
- */
 export default config({
   jsx: {
     enabled: true,

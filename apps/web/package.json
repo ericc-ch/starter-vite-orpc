@@ -10,9 +10,14 @@
     "start": "wrangler dev"
   },
   "dependencies": {
+    "@orpc/client": "^1.8.4",
+    "@orpc/openapi-client": "^1.8.5",
     "@tailwindcss/vite": "^4.1.12",
+    "@tanstack/react-router": "^1.131.27",
+    "@tanstack/react-router-devtools": "^1.131.27",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
+    "rpc": "workspace:*",
     "tailwindcss": "^4.1.12"
   },
   "devDependencies": {
