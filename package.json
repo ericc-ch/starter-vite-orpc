@@ -12,7 +12,7 @@
     "build": "turbo run build",
     "db:generate": "bun run ./scripts/db-generate.ts",
     "dev": "turbo run dev",
-    "lint": "eslint --cache --fix",
+    "lint": "eslint --cache",
     "prepare": "bun run ./scripts/prepare.ts",
     "start": "turbo run start",
     "typegen": "turbo run typegen"
