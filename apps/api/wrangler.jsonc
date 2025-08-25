@@ -5,7 +5,7 @@
   "compatibility_date": "2025-08-14",
   "compatibility_flags": ["nodejs_compat"],
 
-  "main": "src/index.ts",
+  "main": "./src/main.ts",
   "observability": {
     "enabled": true,
   },

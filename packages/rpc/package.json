@@ -4,11 +4,11 @@
   "description": "A starter kit for a Vite + oRPC",
   "type": "module",
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./src/main.ts"
   },
   "dependencies": {
-    "@orpc/client": "catalog:orpc",
     "@orpc/contract": "catalog:orpc",
-    "@orpc/server": "catalog:orpc"
+    "api": "workspace:*",
+    "zod": "catalog:default"
   }
 }

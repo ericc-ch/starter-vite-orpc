@@ -1,7 +1,9 @@
-import { books } from "./books.sql"
+import * as auth from "./auth.sql"
+import * as books from "./books.sql"
 
 export const schema = {
-  books: books,
+  ...auth,
+  ...books,
 }
 
 export * from "./books.sql"
