@@ -1,5 +1,5 @@
 {
-  "name": "rpc",
+  "name": "schema",
   "version": "0.0.0",
   "description": "A starter kit for a Vite + oRPC",
   "type": "module",
@@ -7,8 +7,7 @@
     ".": "./src/main.ts"
   },
   "dependencies": {
-    "@orpc/contract": "catalog:orpc",
-    "schema": "workspace:*",
-    "zod": "catalog:default"
+    "drizzle-orm": "catalog:drizzle",
+    "drizzle-zod": "catalog:drizzle"
   }
 }

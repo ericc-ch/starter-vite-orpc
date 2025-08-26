@@ -1,20 +1,20 @@
 import { oc } from "@orpc/contract"
-import * as db from "api/db"
+import * as schema from "schema"
 import { z } from "zod"
 
 const add = oc
   .route({
     method: "POST",
   })
-  .input(db.bookInsert)
-  .output(db.bookSelect)
+  .input(schema.bookInsert)
+  .output(schema.bookSelect)
 
 const list = oc
   .route({
     method: "GET",
   })
   .input(z.object({}))
-  .output(z.object({ data: z.array(db.bookSelect) }))
+  .output(z.object({ data: z.array(schema.bookSelect) }))
 
 const get = oc
   .route({
@@ -26,7 +26,7 @@ const get = oc
       id: z.number(),
     }),
   )
-  .output(db.bookSelect)
+  .output(schema.bookSelect)
 
 const update = oc
   .route({
@@ -35,11 +35,11 @@ const update = oc
   })
   .input(
     z.object({
-      ...db.bookUpdate.shape,
+      ...schema.bookUpdate.shape,
       id: z.number(),
     }),
   )
-  .output(db.bookSelect)
+  .output(schema.bookSelect)
 
 const remove = oc
   .route({
@@ -47,7 +47,7 @@ const remove = oc
     method: "DELETE",
   })
   .input(z.object({ id: z.number() }))
-  .output(db.bookSelect)
+  .output(schema.bookSelect)
 
 export const books = oc.prefix("/books").router({
   get,

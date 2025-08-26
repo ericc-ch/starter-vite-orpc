@@ -6,7 +6,7 @@ const { stdout } = Bun.spawnSync([
   "--config",
   "./apps/api/src/auth/config.ts",
   "--output",
-  "./apps/api/src/db/schema/auth.sql.ts",
+  "./packages/schema/src/auth.sql.ts",
 ])
 
 process.stdout.write(stdout)

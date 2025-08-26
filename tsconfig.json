@@ -4,6 +4,7 @@
     { "path": "./apps/api" },
     { "path": "./apps/web/" },
     { "path": "./packages/rpc" },
+    { "path": "./packages/schema" },
     { "path": "./tsconfig.configs.json" }
   ],
 

@@ -23,6 +23,7 @@
     "drizzle-zod": "catalog:drizzle",
     "hono": "^4.9.4",
     "rpc": "workspace:*",
+    "schema": "workspace:*",
     "zod": "catalog:default"
   },
   "devDependencies": {

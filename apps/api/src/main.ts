@@ -3,8 +3,9 @@ import { implement, ORPCError } from "@orpc/server"
 import { eq } from "drizzle-orm"
 import { Hono } from "hono"
 import { contract } from "rpc"
+import { books } from "schema"
 
-import { books, db } from "./db/main"
+import { db } from "./lib/db"
 
 const os = implement(contract)
 

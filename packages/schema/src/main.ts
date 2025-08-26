@@ -6,4 +6,5 @@ export const schema = {
   ...books,
 }
 
+export * from "./auth.sql"
 export * from "./books.sql"

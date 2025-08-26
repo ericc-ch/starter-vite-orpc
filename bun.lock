@@ -26,6 +26,7 @@
         "drizzle-zod": "catalog:drizzle",
         "hono": "^4.9.4",
         "rpc": "workspace:*",
+        "schema": "workspace:*",
         "zod": "catalog:default",
       },
       "devDependencies": {
@@ -62,8 +63,16 @@
       "version": "0.0.0",
       "dependencies": {
         "@orpc/contract": "catalog:orpc",
-        "api": "workspace:*",
+        "schema": "workspace:*",
         "zod": "catalog:default",
+      },
+    },
+    "packages/schema": {
+      "name": "schema",
+      "version": "0.0.0",
+      "dependencies": {
+        "drizzle-orm": "catalog:drizzle",
+        "drizzle-zod": "catalog:drizzle",
       },
     },
   },
@@ -1269,6 +1278,8 @@
     "safe-regex-test": ["safe-regex-test@1.1.0", "", { "dependencies": { "call-bound": "^1.0.2", "es-errors": "^1.3.0", "is-regex": "^1.2.1" } }, "sha512-x/+Cz4YrimQxQccJf5mKEbIa1NzeCRNI5Ecl/ekmlYaampdNLPalVyIcCZNNH3MvmqBugV5TMYZXv0ljslUlaw=="],
 
     "scheduler": ["scheduler@0.26.0", "", {}, "sha512-NlHwttCI/l5gCPR3D1nNXtWABUmBwvZpEQiD4IXSbIDq8BzLIK/7Ir5gTFSGZDUu37K5cMNp0hFtzO38sC7gWA=="],
+
+    "schema": ["schema@workspace:packages/schema"],
 
     "scslre": ["scslre@0.3.0", "", { "dependencies": { "@eslint-community/regexpp": "^4.8.0", "refa": "^0.12.0", "regexp-ast-analysis": "^0.7.0" } }, "sha512-3A6sD0WYP7+QrjbfNA2FN3FsOaGGFoekCVgTyypy53gPxhbkCIjtO6YWgdrfM+n/8sI8JeXZOIxsHjMTNxQ4nQ=="],
 
