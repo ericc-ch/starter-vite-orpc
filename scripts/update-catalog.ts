@@ -12,6 +12,9 @@ async function getLatestVersion(packageName: string): Promise<string> {
 }
 
 async function main() {
+  const updatedPackageJSON = { ...packageJSON }
+  let hasUpdates = false
+
   for (const [catalogName, packages] of Object.entries(packageJSON.catalogs)) {
     console.log(`\n📦 Catalog: ${catalogName}`)
     console.log("─".repeat(50))
@@ -25,6 +28,16 @@ async function main() {
         console.log(`${status} ${packageName}`)
         console.log(`   Current: ${currentVersion}`)
         console.log(`   Latest:  ${latestVersion}`)
+
+        if (cleanCurrentVersion !== latestVersion) {
+          ;(
+            updatedPackageJSON.catalogs as Record<
+              string,
+              Record<string, string>
+            >
+          )[catalogName][packageName] = `^${latestVersion}`
+          hasUpdates = true
+        }
       } catch (error) {
         console.log(`❌ ${packageName}`)
         console.log(`   Current: ${currentVersion}`)
@@ -33,6 +46,13 @@ async function main() {
         )
       }
     }
+  }
+
+  if (hasUpdates) {
+    await Bun.write("package.json", JSON.stringify(updatedPackageJSON, null, 2))
+    console.log("\n✅ Package.json updated with latest versions")
+  } else {
+    console.log("\n✅ All packages are up to date")
   }
 }
 
