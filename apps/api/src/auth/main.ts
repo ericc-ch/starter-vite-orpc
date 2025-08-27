@@ -2,7 +2,7 @@ import { betterAuth } from "better-auth"
 import { drizzleAdapter, type DB } from "better-auth/adapters/drizzle"
 import { env } from "cloudflare:workers"
 
-import { db } from "../db/main"
+import { db } from "../lib/db"
 
 export const getAuth = (db: DB) =>
   betterAuth({
