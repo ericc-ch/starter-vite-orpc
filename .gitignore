@@ -9,6 +9,9 @@ worker-configuration.d.ts
 .env*
 !.env.example
 
+# typescript
+*.tsbuildinfo
+
 # turbo
 .turbo/
 
