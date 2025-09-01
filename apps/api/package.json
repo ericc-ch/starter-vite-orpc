@@ -21,7 +21,7 @@
     "better-auth": "catalog:better-auth",
     "drizzle-orm": "catalog:drizzle",
     "drizzle-zod": "catalog:drizzle",
-    "hono": "^4.9.4",
+    "hono": "^4.9.5",
     "rpc": "workspace:*",
     "schema": "workspace:*",
     "zod": "catalog:default"
