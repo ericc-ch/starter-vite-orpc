@@ -23,4 +23,7 @@ migrations/
 
 # frontend
 dist/
+.nitro/
+.output/
+.tanstack/
 *.gen.ts

@@ -2,10 +2,13 @@
   "$schema": "../../node_modules/wrangler/config-schema.json",
 
   "name": "web",
+  "main": ".output/server/index.mjs",
+
   "compatibility_date": "2025-08-14",
+  "compatibility_flags": ["nodejs_compat"],
 
   "assets": {
-    "not_found_handling": "single-page-application",
+    "directory": ".output/public",
   },
   "observability": {
     "enabled": true,
