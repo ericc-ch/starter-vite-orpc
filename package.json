@@ -14,7 +14,7 @@
     "deploy": "alchemy deploy",
     "dev": "alchemy dev",
     "lint": "eslint --cache",
-    "prepare": "bun run ./scripts/prepare.ts",
+    "prepare": "simple-git-hooks",
     "start": "turbo run start",
     "typecheck": "tsc --build"
   },
@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "@better-auth/cli": "^1.3.7",
+    "@cloudflare/workers-types": "^4.20250902.0",
     "@echristian/eslint-config": "^0.0.54",
     "@types/bun": "^1.2.21",
     "alchemy": "^0.64.0",

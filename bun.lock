@@ -5,6 +5,7 @@
       "name": "starter-client-server",
       "devDependencies": {
         "@better-auth/cli": "^1.3.7",
+        "@cloudflare/workers-types": "^4.20250902.0",
         "@echristian/eslint-config": "^0.0.54",
         "@types/bun": "^1.2.21",
         "alchemy": "^0.64.0",
@@ -34,7 +35,7 @@
         "zod": "catalog:default",
       },
       "devDependencies": {
-        "@cloudflare/workers-types": "^4.20250902.0",
+        "@cloudflare/workers-types": "catalog:cloudflare",
         "@types/node": "^24.3.0",
         "wrangler": "catalog:cloudflare",
       },
@@ -43,8 +44,6 @@
       "name": "web",
       "version": "0.0.0",
       "dependencies": {
-        "@orpc/client": "^1.8.6",
-        "@orpc/openapi-client": "^1.8.6",
         "@tailwindcss/vite": "^4.1.12",
         "@tanstack/react-router": "^1.131.31",
         "@tanstack/react-router-devtools": "^1.131.31",
@@ -55,7 +54,7 @@
         "tailwindcss": "^4.1.12",
       },
       "devDependencies": {
-        "@cloudflare/workers-types": "^4.20250902.0",
+        "@cloudflare/workers-types": "catalog:cloudflare",
         "@types/node": "^24.3.0",
         "@types/react": "^19.1.12",
         "@types/react-dom": "^19.1.9",
@@ -70,9 +69,14 @@
       "name": "rpc",
       "version": "0.0.0",
       "dependencies": {
+        "@orpc/client": "catalog:orpc",
         "@orpc/contract": "catalog:orpc",
+        "@orpc/openapi-client": "catalog:orpc",
         "schema": "workspace:*",
         "zod": "catalog:default",
+      },
+      "devDependencies": {
+        "@cloudflare/workers-types": "catalog:cloudflare",
       },
     },
     "packages/schema": {
@@ -89,6 +93,7 @@
       "better-auth": "^1.3.7",
     },
     "cloudflare": {
+      "@cloudflare/workers-types": "^4.20250902.0",
       "wrangler": "^4.33.1",
     },
     "default": {
@@ -103,6 +108,7 @@
       "@orpc/client": "^1.8.6",
       "@orpc/contract": "^1.8.6",
       "@orpc/openapi": "^1.8.6",
+      "@orpc/openapi-client": "^1.8.6",
       "@orpc/server": "^1.8.6",
     },
   },
