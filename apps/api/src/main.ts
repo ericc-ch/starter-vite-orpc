@@ -1,86 +1,36 @@
 import { OpenAPIHandler } from "@orpc/openapi/fetch"
-import { implement, ORPCError } from "@orpc/server"
-import { eq } from "drizzle-orm"
+import { implement } from "@orpc/server"
 import { Hono } from "hono"
 import { contract } from "rpc"
-import { books } from "schema"
 
-import { db } from "./lib/db"
+import { auth } from "./auth/main"
+import { createContext, type Context } from "./context"
+import * as booksRPC from "./rpc/books"
 
-const os = implement(contract)
-
-const app = new Hono()
-
-const handler = new OpenAPIHandler(
+const os = implement(contract).$context<Context>()
+const rpc = new OpenAPIHandler(
   os.router({
-    books: {
-      add: os.books.add.handler(async ({ input }) => {
-        const data = await db.insert(books).values(input).returning()
-        const book = data.at(0)
-
-        if (!book) {
-          throw new ORPCError("NOT_FOUND")
-        }
-
-        return book
-      }),
-      list: os.books.list.handler(async () => {
-        const data = await db.select().from(books)
-        return { data }
-      }),
-      get: os.books.get.handler(async ({ input }) => {
-        const data = await db
-          .select()
-          .from(books)
-          .where(eq(books.id, input.id))
-          .limit(1)
-        const book = data.at(0)
-
-        if (!book) {
-          throw new ORPCError("NOT_FOUND")
-        }
-        return book
-      }),
-      update: os.books.update.handler(async ({ input }) => {
-        const data = await db
-          .update(books)
-          .set(input)
-          .where(eq(books.id, input.id))
-          .returning()
-          .limit(1)
-        const book = data.at(0)
-
-        if (!book) {
-          throw new ORPCError("NOT_FOUND")
-        }
-
-        return book
-      }),
-      remove: os.books.remove.handler(async ({ input }) => {
-        const data = await db
-          .delete(books)
-          .where(eq(books.id, input.id))
-          .returning()
-          .limit(1)
-        const book = data.at(0)
-
-        if (!book) {
-          throw new ORPCError("NOT_FOUND")
-        }
-        return book
-      }),
-    },
+    books: booksRPC.handlers,
   }),
 )
 
+const app = new Hono()
+
+app.on(["POST", "GET"], "/api/auth/*", (c) => {
+  return auth.handler(c.req.raw)
+})
+
 app.use("/rpc/*", async (c, next) => {
-  const { matched, response } = await handler.handle(c.req.raw, {
+  // This isn't a React context, duh
+  // eslint-disable-next-line @eslint-react/naming-convention/context-name
+  const context = await createContext({ context: c })
+  const { matched, response } = await rpc.handle(c.req.raw, {
     prefix: "/rpc",
-    context: {}, // Provide initial context if needed
+    context,
   })
 
   if (matched) {
-    return c.newResponse(response.body, response)
+    return response
   }
 
   await next()
