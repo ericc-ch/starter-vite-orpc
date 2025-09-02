@@ -11,6 +11,8 @@ export const getAuth = (db: DB) =>
       usePlural: true,
       camelCase: true,
     }),
+    secret: process.env.API_BETTER_AUTH_SECRET || "",
+    baseURL: process.env.API_BETTER_AUTH_URL || "http://localhost:8787",
     secondaryStorage: {
       get: (key) => env.KV.get(key),
       set: (key, value, ttl) =>
