@@ -1,6 +1,7 @@
 import { OpenAPIHandler } from "@orpc/openapi/fetch"
 import { implement } from "@orpc/server"
 import { Hono } from "hono"
+import { cors } from "hono/cors"
 import { contract } from "rpc"
 
 import { auth } from "./auth/main"
@@ -15,6 +16,13 @@ const rpc = new OpenAPIHandler(
 )
 
 const app = new Hono()
+
+app.use(
+  cors({
+    origin: process.env.API_CORS_ORIGIN ?? "http://localhost:5173",
+    credentials: true,
+  }),
+)
 
 app.on(["POST", "GET"], "/api/auth/*", (c) => {
   return auth.handler(c.req.raw)
