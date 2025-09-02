@@ -4,6 +4,7 @@
 
   "compilerOptions": {
     "composite": true,
+
     "types": ["node", "@cloudflare/workers-types"]
   }
 }

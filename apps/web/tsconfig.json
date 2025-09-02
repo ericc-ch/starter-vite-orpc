@@ -4,6 +4,8 @@
 
   "compilerOptions": {
     "composite": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+
+    "types": ["node", "@cloudflare/workers-types"]
   }
 }
