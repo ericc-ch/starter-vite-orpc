@@ -8,6 +8,10 @@
   ],
 
   "compilerOptions": {
-    "composite": true
+    "composite": true,
+    "types": [
+      "bun",
+      "@cloudflare/workers-types",
+    ]
   }
 }
