@@ -1,13 +1,16 @@
 import alchemy from "alchemy"
-import { TanStackStart } from "alchemy/cloudflare"
-import { Worker } from "alchemy/cloudflare"
-import { D1Database, KVNamespace } from "alchemy/cloudflare"
+import {
+  D1Database,
+  KVNamespace,
+  TanStackStart,
+  Worker,
+} from "alchemy/cloudflare"
 import { Exec } from "alchemy/os"
 import { config } from "dotenv"
 
 config({ path: "./.env" })
-config({ path: "./apps/web/.env" })
 config({ path: "./apps/api/.env" })
+config({ path: "./apps/web/.env" })
 
 const app = await alchemy("starter-web")
 
@@ -24,17 +27,6 @@ const kv = await KVNamespace("kv", {
   title: `${app.name}-kv-${app.stage}`,
 })
 
-export const web = await TanStackStart("web", {
-  name: `${app.name}-worker-web-${app.stage}`,
-  cwd: "./apps/web/",
-  entrypoint: "./.output/server/index.mjs",
-  assets: "./.output/public/",
-  compatibility: "node",
-  dev: {
-    command: "bun run dev",
-  },
-})
-
 export const api = await Worker("api", {
   name: `${app.name}-worker-api-${app.stage}`,
   cwd: "./apps/api",
@@ -46,6 +38,20 @@ export const api = await Worker("api", {
   },
   dev: {
     port: 7000,
+  },
+})
+
+export const web = await TanStackStart("web", {
+  name: `${app.name}-worker-web-${app.stage}`,
+  cwd: "./apps/web/",
+  entrypoint: "./.output/server/index.mjs",
+  assets: "./.output/public/",
+  compatibility: "node",
+  bindings: {
+    API: api,
+  },
+  dev: {
+    command: "bun run dev",
   },
 })
 
