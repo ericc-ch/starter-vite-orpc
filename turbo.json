@@ -4,17 +4,10 @@
     "build": {
       "outputs": ["dist/**"]
     },
-    "dev": {
-      "cache": false,
-      "persistent": true
-    },
     "start": {
       "dependsOn": ["build"],
       "cache": false,
       "persistent": true
-    },
-    "typegen": {
-      "outputs": ["worker-configuration.d.ts"]
     }
   }
 }

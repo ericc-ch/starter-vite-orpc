@@ -1,6 +1,11 @@
 {
   "extends": "./tsconfig.json",
-  "include": ["./.opencode/plugins/","./scripts/", "**/*.config.*"],
+  "include": [
+    "./.opencode/plugin/",
+    "./scripts/",
+    "./alchemy.run.ts",
+    "**/*.config.*"
+  ],
 
   "compilerOptions": {
     "composite": true

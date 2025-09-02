@@ -27,6 +27,8 @@
     "zod": "catalog:default"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "catalog:cloudflare",
+    "@types/node": "^24.3.0",
     "wrangler": "catalog:cloudflare"
   }
 }

@@ -9,6 +9,9 @@ worker-configuration.d.ts
 .env*
 !.env.example
 
+# alchemy
+.alchemy/
+
 # typescript
 *.tsbuildinfo
 
