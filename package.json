@@ -11,6 +11,7 @@
     "auth:generate": "bun run ./scripts/auth-generate.ts",
     "build": "turbo run build",
     "db:generate": "bun run ./scripts/db-generate.ts",
+    "deploy": "alchemy deploy",
     "dev": "alchemy dev",
     "lint": "eslint --cache",
     "prepare": "bun run ./scripts/prepare.ts",
