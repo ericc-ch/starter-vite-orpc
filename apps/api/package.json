@@ -21,14 +21,14 @@
     "better-auth": "catalog:better-auth",
     "drizzle-orm": "catalog:drizzle",
     "drizzle-zod": "catalog:drizzle",
-    "hono": "^4.9.5",
+    "hono": "^4.10.2",
     "rpc": "workspace:*",
     "schema": "workspace:*",
     "zod": "catalog:default"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "catalog:cloudflare",
-    "@types/node": "^24.3.0",
+    "@types/node": "^24.9.1",
     "wrangler": "catalog:cloudflare"
   }
 }
