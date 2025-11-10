@@ -1,10 +1,5 @@
 import alchemy from "alchemy"
-import {
-  D1Database,
-  KVNamespace,
-  TanStackStart,
-  Worker,
-} from "alchemy/cloudflare"
+import { D1Database, KVNamespace, Vite, Worker } from "alchemy/cloudflare"
 import { Exec } from "alchemy/os"
 import { config } from "dotenv"
 
@@ -36,23 +31,11 @@ export const api = await Worker("api", {
     DB: db,
     KV: kv,
   },
-  dev: {
-    port: 7000,
-  },
 })
 
-export const web = await TanStackStart("web", {
+export const web = await Vite("web", {
   name: `${app.name}-worker-web-${app.stage}`,
   cwd: "./apps/web/",
-  entrypoint: "./.output/server/index.mjs",
-  assets: "./.output/public/",
-  compatibility: "node",
-  bindings: {
-    API: api,
-  },
-  dev: {
-    command: "bun run dev",
-  },
 })
 
 console.log(`Web -> ${web.url}`)

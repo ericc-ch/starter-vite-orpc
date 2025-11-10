@@ -5,7 +5,7 @@
     { "path": "./apps/web/" },
     { "path": "./packages/rpc" },
     { "path": "./packages/schema" },
-    { "path": "./tsconfig.misc.json" }
+    { "path": "./tsconfig.tools.json" }
   ],
 
   "compilerOptions": {
@@ -20,10 +20,20 @@
     "noEmit": true,
 
     "strict": true,
+    "exactOptionalPropertyTypes": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": false,
+    "noUncheckedIndexedAccess": true,
+
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true,
+
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "exactOptionalPropertyTypes": true,
-    "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "allowUnusedLabels": false,
+    "allowUnreachableCode": false,
+
+    "forceConsistentCasingInFileNames": true
   }
 }

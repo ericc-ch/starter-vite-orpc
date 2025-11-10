@@ -29,8 +29,6 @@ app.on(["POST", "GET"], "/api/auth/*", (c) => {
 })
 
 app.use("/rpc/*", async (c, next) => {
-  // This isn't a React context, duh
-  // eslint-disable-next-line @eslint-react/naming-convention/context-name
   const context = await createContext({ context: c })
   const { matched, response } = await rpc.handle(c.req.raw, {
     prefix: "/rpc",
@@ -41,7 +39,7 @@ app.use("/rpc/*", async (c, next) => {
     return response
   }
 
-  await next()
+  return await next()
 })
 
 export default app

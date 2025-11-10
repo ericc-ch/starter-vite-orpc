@@ -9,9 +9,6 @@
 
   "compilerOptions": {
     "composite": true,
-    "types": [
-      "bun",
-      "@cloudflare/workers-types",
-    ]
+    "types": ["bun", "@cloudflare/workers-types"]
   }
 }
