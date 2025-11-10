@@ -10,10 +10,10 @@
   "scripts": {
     "auth:generate": "bun run ./scripts/auth-generate.ts",
     "build": "turbo run build",
-    "format": "prettier --write .",
     "db:generate": "bun run ./scripts/db-generate.ts",
     "deploy": "alchemy deploy",
     "dev": "alchemy dev",
+    "format": "prettier --write .",
     "start": "turbo run start",
     "typecheck": "tsc --build"
   },

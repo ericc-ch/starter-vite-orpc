@@ -8,6 +8,9 @@
     "dev": "vite"
   },
   "dependencies": {
+    "@orpc/client": "catalog:orpc",
+    "@orpc/openapi": "catalog:orpc",
+    "@orpc/openapi-client": "catalog:orpc",
     "@tailwindcss/vite": "^4.1.17",
     "@tanstack/react-devtools": "^0.8.1",
     "@tanstack/react-router": "^1.135.0",

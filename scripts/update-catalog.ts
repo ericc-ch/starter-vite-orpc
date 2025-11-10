@@ -1,5 +1,9 @@
 import packageJSON from "../package.json" with { type: "json" }
 
+interface PackageJSON {
+  catalogs?: Record<string, Record<string, string>>
+}
+
 async function getLatestVersion(packageName: string): Promise<string> {
   const response = await fetch(
     `https://registry.npmjs.org/${packageName}/latest`,
@@ -12,10 +16,17 @@ async function getLatestVersion(packageName: string): Promise<string> {
 }
 
 async function main() {
-  const updatedPackageJSON = { ...packageJSON }
+  const updatedPackageJSON = { ...packageJSON } as PackageJSON
   let hasUpdates = false
 
-  for (const [catalogName, packages] of Object.entries(packageJSON.catalogs)) {
+  if (!updatedPackageJSON.catalogs) {
+    console.log("No catalogs found in package.json")
+    return
+  }
+
+  for (const [catalogName, packages] of Object.entries(
+    updatedPackageJSON.catalogs,
+  )) {
     console.log(`\n📦 Catalog: ${catalogName}`)
     console.log("─".repeat(50))
 
@@ -30,13 +41,11 @@ async function main() {
         console.log(`   Latest:  ${latestVersion}`)
 
         if (cleanCurrentVersion !== latestVersion) {
-          ;(
-            updatedPackageJSON.catalogs as Record<
-              string,
-              Record<string, string>
-            >
-          )[catalogName][packageName] = `^${latestVersion}`
-          hasUpdates = true
+          if (updatedPackageJSON.catalogs?.[catalogName]) {
+            updatedPackageJSON.catalogs[catalogName][packageName] =
+              `^${latestVersion}`
+            hasUpdates = true
+          }
         }
       } catch (error) {
         console.log(`❌ ${packageName}`)
