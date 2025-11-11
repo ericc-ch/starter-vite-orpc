@@ -33,7 +33,6 @@
       "devDependencies": {
         "@cloudflare/workers-types": "catalog:cloudflare",
         "@types/node": "^24.10.0",
-        "wrangler": "catalog:cloudflare",
       },
     },
     "apps/web": {
@@ -62,7 +61,6 @@
         "@vitejs/plugin-react": "^5.1.0",
         "typescript": "^5.9.3",
         "vite": "^7.2.2",
-        "wrangler": "catalog:cloudflare",
       },
     },
     "packages/rpc": {
@@ -94,7 +92,6 @@
     },
     "cloudflare": {
       "@cloudflare/workers-types": "^4.20251109.0",
-      "wrangler": "^4.46.0",
     },
     "default": {
       "zod": "^4.1.12",

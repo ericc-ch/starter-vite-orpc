@@ -37,7 +37,6 @@
       "better-auth": "^1.3.34"
     },
     "cloudflare": {
-      "wrangler": "^4.46.0",
       "@cloudflare/workers-types": "^4.20251109.0"
     },
     "drizzle": {

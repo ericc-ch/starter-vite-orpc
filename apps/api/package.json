@@ -9,11 +9,7 @@
     }
   },
   "scripts": {
-    "deploy": "wrangler deploy",
-    "dev": "wrangler dev",
-    "start": "wrangler dev",
-    "test": "vitest",
-    "typegen": "wrangler types"
+    "test": "vitest"
   },
   "dependencies": {
     "@orpc/openapi": "catalog:orpc",
@@ -28,7 +24,6 @@
   },
   "devDependencies": {
     "@cloudflare/workers-types": "catalog:cloudflare",
-    "@types/node": "^24.10.0",
-    "wrangler": "catalog:cloudflare"
+    "@types/node": "^24.10.0"
   }
 }
