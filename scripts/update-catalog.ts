@@ -1,3 +1,5 @@
+#!/usr/bin/env bun
+
 import packageJSON from "../package.json" with { type: "json" }
 
 interface PackageJSON {

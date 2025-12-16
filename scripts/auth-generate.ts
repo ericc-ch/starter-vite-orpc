@@ -1,3 +1,5 @@
+#!/usr/bin/env bun
+
 const { stdout } = Bun.spawnSync([
   "bunx",
   "@better-auth/cli",
