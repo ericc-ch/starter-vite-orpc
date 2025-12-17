@@ -1,4 +1,5 @@
 import alchemy from "alchemy"
+import { CloudflareStateStore } from "alchemy/state"
 import { D1Database, KVNamespace, Vite, Worker } from "alchemy/cloudflare"
 import { Exec } from "alchemy/os"
 import { config } from "dotenv"
@@ -7,7 +8,9 @@ config({ path: "./.env" })
 config({ path: "./apps/api/.env" })
 config({ path: "./apps/web/.env" })
 
-const app = await alchemy("starter-web")
+const app = await alchemy("starter-web", {
+  stateStore: (scope) => new CloudflareStateStore(scope),
+})
 
 await Exec("db-generate", {
   command: "bun run db:generate",
