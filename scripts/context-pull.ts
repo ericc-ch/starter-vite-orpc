@@ -26,6 +26,11 @@ export const repos = [
     remote: "https://github.com/alchemy-run/alchemy.git",
     branch: "main",
   },
+  {
+    name: "orpc",
+    remote: "https://github.com/unnoq/orpc.git",
+    branch: "main",
+  },
 ]
 
 for (const repo of repos) {
