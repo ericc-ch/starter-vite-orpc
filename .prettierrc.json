@@ -1,6 +1,8 @@
 {
   "$schema": "https://json.schemastore.org/prettierrc",
+
   "semi": false,
+
   "experimentalOperatorPosition": "start",
   "experimentalTernaries": true
 }

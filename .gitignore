@@ -1,28 +1,21 @@
 # npm
 node_modules/
 
-# wrangler project
+# wrangler
 .wrangler/
-worker-configuration.d.ts
 .dev.vars*
 !.dev.vars.example
 .env*
 !.env.example
 
-# alchemy
+# alchemy states
 .alchemy/
+
+# llm context
+.context/
 
 # typescript
 *.tsbuildinfo
-
-# turbo
-.turbo/
-
-# eslint
-.eslintcache
-
-# migrations, un-ignore for real apps
-migrations/
 
 # frontend
 dist/
@@ -31,5 +24,5 @@ dist/
 .tanstack/
 *.gen.ts
 
-# llm context
-.context/
+# migrations, track for real apps
+migrations/
