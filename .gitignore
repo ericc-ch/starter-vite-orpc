@@ -30,3 +30,6 @@ dist/
 .output/
 .tanstack/
 *.gen.ts
+
+# llm context
+.context/
