@@ -10,6 +10,7 @@
   "scripts": {
     "auth:generate": "bun run ./scripts/auth-generate.ts",
     "build": "turbo run build",
+    "lint": "oxlint",
     "db:generate": "bun run ./scripts/db-generate.ts",
     "deploy": "alchemy deploy",
     "dev": "alchemy dev",
@@ -18,12 +19,12 @@
     "typecheck": "tsc --build"
   },
   "devDependencies": {
-    "@better-auth/cli": "^1.4.7",
-    "@cloudflare/workers-types": "^4.20251216.0",
+    "@better-auth/cli": "catalog:better-auth",
+    "@cloudflare/workers-types": "catalog:cloudflare",
     "@types/bun": "^1.3.4",
     "alchemy": "^0.81.3",
     "dotenv": "^17.2.3",
-    "drizzle-kit": "^0.31.8",
+    "drizzle-kit": "catalog:drizzle",
     "oxlint": "^1.33.0",
     "prettier": "^3.7.4",
     "turbo": "^2.6.3",
@@ -35,7 +36,8 @@
       "zod": "^4.2.1"
     },
     "better-auth": {
-      "better-auth": "^1.4.7"
+      "better-auth": "^1.4.7",
+      "@better-auth/cli": "^1.4.7"
     },
     "cloudflare": {
       "@cloudflare/workers-types": "^4.20251216.0"
