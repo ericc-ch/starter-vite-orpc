@@ -3,9 +3,10 @@
 ## Build & Commands
 
 - **Dev**: `bun run dev` - Start all services via Alchemy
-- **Build**: `bun run build` - Build all packages (Turborepo)
+- **Deploy**: `bun run deploy` - Deploy to Cloudflare via Alchemy
 - **Typecheck**: `bun run typecheck` - Run TypeScript checks
 - **Format**: `bun run format` - Format with Prettier
+- **Lint**: `bun run lint` - Lint with oxlint
 - **Test**: `bun run test` in `apps/api/` - Run Vitest (single test: `vitest path/to/file.test.ts`)
 
 ## Code Style

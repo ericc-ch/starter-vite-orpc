@@ -8,7 +8,7 @@ A modern full-stack starter template using Vite, oRPC, React, Hono, Better Auth,
 - **Backend**: Hono, oRPC, Cloudflare Workers
 - **Database**: Drizzle ORM (with D1 support)
 - **Auth**: Better Auth
-- **Monorepo**: Turborepo with Bun workspaces
+- **Monorepo**: Bun workspaces
 - **Deployment**: Alchemy (Cloudflare)
 
 ## Project Structure
@@ -93,14 +93,6 @@ This will start:
 - API server at `http://localhost:8787`
 - Web app at `http://localhost:5173`
 
-### Build
-
-Build all packages and apps:
-
-```bash
-bun run build
-```
-
 ### Deployment
 
 Deploy to Cloudflare:
@@ -112,13 +104,12 @@ bun run deploy
 ## Available Scripts
 
 - `bun run dev` - Start development servers
-- `bun run build` - Build all packages
-- `bun run start` - Start production servers
+- `bun run deploy` - Deploy to Cloudflare
 - `bun run typecheck` - Run TypeScript type checking
 - `bun run format` - Format code with Prettier
+- `bun run lint` - Lint code with oxlint
 - `bun run db:generate` - Generate database migrations
 - `bun run auth:generate` - Generate auth schema
-- `bun run deploy` - Deploy to Cloudflare
 
 ## Features
 
@@ -129,7 +120,7 @@ bun run deploy
 - ✅ Database ORM with Drizzle
 - ✅ Modern React with TanStack Router
 - ✅ Cloudflare Workers deployment
-- ✅ Monorepo setup with Turborepo
+- ✅ Monorepo setup with Bun workspaces
 - ✅ CRUD operations example (Books API)
 - ✅ Shared contracts between frontend and backend
 
