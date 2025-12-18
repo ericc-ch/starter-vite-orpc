@@ -24,6 +24,8 @@
   },
   "devDependencies": {
     "@cloudflare/workers-types": "catalog:cloudflare",
-    "@types/node": "^24.10.0"
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/node": "catalog:default",
+    "better-sqlite3": "^11.9.1"
   }
 }

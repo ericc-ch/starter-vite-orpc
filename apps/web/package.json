@@ -13,24 +13,26 @@
     "@orpc/openapi-client": "catalog:orpc",
     "@orpc/tanstack-query": "catalog:orpc",
     "@tailwindcss/vite": "^4.1.17",
-    "@tanstack/react-devtools": "^0.8.1",
-    "@tanstack/react-query": "^5.90.12",
-    "@tanstack/react-router": "^1.135.0",
-    "@tanstack/react-router-devtools": "^1.135.0",
-    "@tanstack/router-plugin": "^1.135.0",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0",
+    "@tanstack/react-devtools": "catalog:tanstack",
+    "@tanstack/react-query": "catalog:tanstack",
+    "@tanstack/react-router": "catalog:tanstack",
+    "@tanstack/react-router-devtools": "catalog:tanstack",
+    "@tanstack/router-plugin": "catalog:tanstack",
+    "react": "catalog:react",
+    "react-dom": "catalog:react",
     "rpc": "workspace:*",
     "tailwindcss": "^4.1.17"
   },
   "devDependencies": {
     "@cloudflare/vite-plugin": "^1.14.0",
     "@cloudflare/workers-types": "catalog:cloudflare",
-    "@types/node": "^24.10.0",
-    "@types/react": "^19.2.2",
-    "@types/react-dom": "^19.2.2",
+    "@types/node": "catalog:default",
+    "@types/react": "catalog:react",
+    "@types/react-dom": "catalog:react",
     "@vitejs/plugin-react": "^5.1.0",
-    "typescript": "^5.9.3",
-    "vite": "^7.2.2"
+    "@vitest/browser-playwright": "catalog:vitest",
+    "typescript": "catalog:default",
+    "vite": "^7.2.2",
+    "vitest-browser-react": "catalog:vitest"
   }
 }
