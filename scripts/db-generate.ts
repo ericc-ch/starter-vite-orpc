@@ -9,5 +9,3 @@ for (const command of commands) {
   const { stdout } = command()
   process.stdout.write(stdout)
 }
-
-export {}

@@ -39,8 +39,7 @@ export const api = await Worker("api", {
 export const web = await Vite("web", {
   name: `${app.name}-worker-web-${app.stage}`,
   cwd: "./apps/web/",
-  // for some reason alchemy/vite needs entrypoint otherwise it'll return 404
-  entrypoint: "./src/worker.ts",
+  assets: "./dist/client/",
 })
 
 console.log(`Web -> ${web.url}`)
