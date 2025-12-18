@@ -365,14 +365,405 @@ VITE_API_URL=http://localhost:3000
 
 ## Summary Checklist
 
-- [ ] Add catalogs to root `package.json`
-- [ ] Add dependencies to `apps/web/package.json`
-- [ ] Run `bun install`
+- [x] ~~Add catalogs to root `package.json`~~
+- [ ] Add dependencies to `apps/web/package.json` _(partial: missing `better-auth`)_
+- [x] ~~Run `bun install`~~
 - [ ] Enable `emailAndPassword` in `apps/api/src/auth/main.ts`
 - [ ] Create `apps/web/src/lib/auth.ts`
 - [ ] Modify `apps/web/src/lib/rpc.ts` - add `orpc` export
 - [ ] Modify `apps/web/src/main.tsx` - add `QueryClientProvider`
 - [ ] Create `apps/web/src/routes/login.tsx`
 - [ ] Modify `apps/web/src/routes/index.tsx` - protected route with CRUD
-- [ ] Create `apps/web/.env` from `.env.example`
+- [x] ~~Create `apps/web/.env` from `.env.example`~~ _(.env.example exists)_
 - [ ] Run `bun run dev` and test
+
+---
+
+# Testing Setup: App Factory Pattern + Vitest
+
+## Overview
+
+Refactor `apps/api` to use an **App Factory pattern** for testability. This removes the `cloudflare:workers` import from module-level code, making the app testable in Node.js without module aliasing.
+
+### Pattern
+
+```
+┌─────────────────────────────────────────────────────────┐
+│ app.ts                                                  │
+│   createApp(env) → Hono app                             │
+│   - Creates db, auth from env                           │
+│   - Wires up routes, middleware                         │
+│   - Pure function, no side effects                      │
+├─────────────────────────────────────────────────────────┤
+│ main.ts                                                 │
+│   import { env } from "cloudflare:workers"              │
+│   export default createApp(env)                         │
+│   - Production entrypoint only                          │
+├─────────────────────────────────────────────────────────┤
+│ app.test.ts                                             │
+│   createApp(mockEnv)                                    │
+│   - Tests via app.request()                             │
+└─────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 1. Refactor: `apps/api/src/lib/db.ts`
+
+Change from singleton to factory function:
+
+**Before:**
+
+```ts
+import { env } from "cloudflare:workers"
+import { drizzle } from "drizzle-orm/d1"
+import { schema } from "schema"
+
+export const db = drizzle(env.DB, { schema })
+```
+
+**After:**
+
+```ts
+import { drizzle } from "drizzle-orm/d1"
+import { schema } from "schema"
+
+export function createDb(d1: D1Database) {
+  return drizzle(d1, { schema })
+}
+
+export type Database = ReturnType<typeof createDb>
+```
+
+---
+
+## 2. Refactor: `apps/api/src/auth/main.ts`
+
+Remove the singleton export, keep only the factory:
+
+**Before:**
+
+```ts
+import { db } from "../lib/db"
+
+export const getAuth = (db: DB) => betterAuth({ ... })
+export const auth = getAuth(db)
+```
+
+**After:**
+
+```ts
+export const getAuth = (db: DB) => betterAuth({ ... })
+
+export type Auth = ReturnType<typeof getAuth>
+```
+
+---
+
+## 3. Refactor: `apps/api/src/context.ts`
+
+Accept db and auth as parameters:
+
+**Before:**
+
+```ts
+import { auth } from "./auth/main"
+
+export async function createContext({ context }: CreateContextOptions) {
+  const session = await auth.api.getSession({
+    headers: context.req.raw.headers,
+  })
+  return { session }
+}
+```
+
+**After:**
+
+```ts
+import type { Auth } from "./auth/main"
+import type { Database } from "./lib/db"
+
+export type CreateContextOptions = {
+  db: Database
+  auth: Auth
+  honoCtx: HonoContext
+}
+
+export async function createContext({
+  db,
+  auth,
+  honoCtx,
+}: CreateContextOptions) {
+  const session = await auth.api.getSession({
+    headers: honoCtx.req.raw.headers,
+  })
+  return { session, db, auth }
+}
+
+export type Context = Awaited<ReturnType<typeof createContext>>
+```
+
+---
+
+## 4. Refactor: `apps/api/src/rpc/books.ts`
+
+Access db from context instead of importing singleton:
+
+**Before:**
+
+```ts
+import { db } from "../lib/db"
+
+export const handlers = os.router({
+  list: os.list.handler(async () => {
+    const data = await db.select().from(books)
+    return { data }
+  }),
+})
+```
+
+**After:**
+
+```ts
+// No db import
+
+export const handlers = os.router({
+  list: os.list.handler(async ({ context }) => {
+    const data = await context.db.select().from(books)
+    return { data }
+  }),
+})
+```
+
+Apply the same pattern to all handlers: `add`, `get`, `update`, `remove`.
+
+---
+
+## 5. Create: `apps/api/src/app.ts`
+
+New file — the app factory:
+
+```ts
+import { OpenAPIHandler } from "@orpc/openapi/fetch"
+import { implement } from "@orpc/server"
+import { Hono } from "hono"
+import { cors } from "hono/cors"
+import { contract } from "rpc"
+
+import { getAuth, type Auth } from "./auth/main"
+import { createContext, type Context } from "./context"
+import { createDb, type Database } from "./lib/db"
+import * as booksRPC from "./rpc/books"
+
+export type Env = {
+  DB: D1Database
+}
+
+export function createApp(env: Env) {
+  const db = createDb(env.DB)
+  const auth = getAuth(db)
+
+  const os = implement(contract).$context<Context>()
+  const rpc = new OpenAPIHandler(
+    os.router({
+      books: booksRPC.handlers,
+    }),
+  )
+
+  const app = new Hono()
+
+  app.use(
+    cors({
+      origin: process.env.API_CORS_ORIGIN ?? "http://localhost:5173",
+      credentials: true,
+    }),
+  )
+
+  app.get("/", (c) => c.json({ status: "ok" }))
+
+  app.on(["POST", "GET"], "/api/auth/*", (c) => auth.handler(c.req.raw))
+
+  app.use("/rpc/*", async (c, next) => {
+    const context = await createContext({ db, auth, honoCtx: c })
+    const { matched, response } = await rpc.handle(c.req.raw, {
+      prefix: "/rpc",
+      context,
+    })
+
+    if (matched) {
+      return response
+    }
+
+    return await next()
+  })
+
+  return app
+}
+```
+
+---
+
+## 6. Refactor: `apps/api/src/main.ts`
+
+Slim down to just the production entrypoint:
+
+**Before:** (full app code)
+
+**After:**
+
+```ts
+import { env } from "cloudflare:workers"
+import { createApp } from "./app"
+
+export default createApp(env)
+```
+
+---
+
+## 7. Create: `apps/api/src/test/mocks.ts`
+
+Simple stubs for testing:
+
+```ts
+export function createMockDB(): D1Database {
+  return {
+    prepare: () => {
+      throw new Error("MockDB: not implemented")
+    },
+    dump: () => {
+      throw new Error("MockDB: not implemented")
+    },
+    batch: () => {
+      throw new Error("MockDB: not implemented")
+    },
+    exec: () => {
+      throw new Error("MockDB: not implemented")
+    },
+  } as unknown as D1Database
+}
+```
+
+---
+
+## 8. Create: `apps/api/src/app.test.ts`
+
+Integration test using app factory:
+
+```ts
+import { describe, expect, it } from "vitest"
+import { createApp } from "./app"
+import { createMockDB } from "./test/mocks"
+
+describe("api", () => {
+  const app = createApp({ DB: createMockDB() })
+
+  it("returns ok on /", async () => {
+    const res = await app.request("/")
+    expect(res.status).toBe(200)
+    expect(await res.json()).toEqual({ status: "ok" })
+  })
+})
+```
+
+---
+
+## 9. Update: `apps/api/vitest.config.ts`
+
+Remove the `cloudflare:workers` alias (no longer needed):
+
+**Before:**
+
+```ts
+import { defineProject } from "vitest/config"
+
+export default defineProject({
+  resolve: {
+    alias: {
+      "cloudflare:workers": new URL(
+        "./src/test/cloudflare-mock.ts",
+        import.meta.url,
+      ).pathname,
+    },
+  },
+  test: {
+    environment: "node",
+    name: "api",
+  },
+})
+```
+
+**After:**
+
+```ts
+import { defineProject } from "vitest/config"
+
+export default defineProject({
+  test: {
+    environment: "node",
+    name: "api",
+  },
+})
+```
+
+---
+
+## 10. Delete: Old Mock File
+
+Remove `apps/api/src/test/cloudflare-mock.ts` (replaced by `mocks.ts`).
+
+---
+
+## 11. Delete: Old Test File
+
+Remove `apps/api/src/main.test.ts` (replaced by `app.test.ts`).
+
+---
+
+## 12. Verify: `apps/api/src/lib/rpc.ts`
+
+The `requireAuth` middleware references `Context` type. After refactoring `context.ts`, verify that `requireAuth` still works correctly — it should, since `session` remains in the context.
+
+---
+
+## Testing Checklist
+
+- [x] ~~Refactor `apps/api/src/lib/db.ts` — export `createDb()` factory~~
+- [x] ~~Refactor `apps/api/src/auth/main.ts` — remove singleton, export types~~ _(at `lib/auth.ts`)_
+- [x] ~~Refactor `apps/api/src/context.ts` — accept db/auth as params~~ _(at `lib/orpc/context.ts`)_
+- [x] ~~Refactor `apps/api/src/rpc/books.ts` — use `context.db` instead of import~~ _(at `procedures/books.ts`)_
+- [x] ~~Create `apps/api/src/app.ts` — app factory~~
+- [x] ~~Refactor `apps/api/src/main.ts` — slim production entrypoint~~
+- [ ] Create `apps/api/src/test/mocks.ts` — mock DB stub
+- [ ] Create `apps/api/src/app.test.ts` — integration test
+- [x] ~~Update `apps/api/vitest.config.ts` — remove alias~~
+- [x] ~~Delete `apps/api/src/test/cloudflare-mock.ts`~~
+- [ ] Delete `apps/api/src/main.test.ts` _(still exists, uses old pattern)_
+- [x] ~~Verify `apps/api/src/lib/rpc.ts` — `requireAuth` still works~~ _(at `lib/orpc/middleware.ts`)_
+- [ ] Run `bun run test --project api` to verify
+
+---
+
+## Future: oRPC Unit Tests
+
+For unit testing individual RPC handlers without HTTP:
+
+```ts
+// rpc/books.test.ts
+import { call } from "@orpc/server"
+import { handlers } from "./books"
+
+describe("books.list", () => {
+  it("returns books", async () => {
+    const result = await call(handlers.list, {}, {
+      context: {
+        session: null,
+        db: mockDb,  // with in-memory data
+        auth: mockAuth,
+      },
+    })
+    expect(result.data).toEqual([...])
+  })
+})
+```
+
+This requires a more sophisticated mock DB (e.g., in-memory SQLite). Add when needed.

@@ -274,12 +274,12 @@ These are high-impact, low-effort improvements to tackle first:
 1. [ ] Add auth guards to update/remove book handlers
 2. [ ] Build a real example page using the books API
 3. [ ] Add pagination to books list
-4. [ ] Use environment variables for RPC URL
+4. [x] ~~Use environment variables for RPC URL~~
 5. [ ] Add basic ESLint configuration
 6. [ ] Create database seed scripts
-7. [ ] Set up one example test
+7. [ ] Set up one example test _(partial: `main.test.ts` exists but uses old pattern)_
 8. [ ] Add basic CI workflow
-9. [ ] Create root `.env.example`
+9. [x] ~~Create root `.env.example`~~
 10. [ ] Add JSDoc comments to main functions
 
 ## Contributing
